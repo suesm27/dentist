@@ -1,0 +1,23 @@
+<div class='container' ng-controller='appointmentsController'>
+    <div class='row body'>
+        <div class='col-sm-6'>
+            <form class="form" name="appointmentForm" novalidate>
+                <h1>New Appointment</h1>
+                <p class="text-danger" ng-show="appointmentForm.date.$error.min">Appointment date must be in the future</p>
+                <label>Date:</label>
+                <input name="date" type="date" class="form-control" ng-model='newAppointment.date' min="{{date | date:'yyyy-MM-dd'}}" required>
+                <p class="text-danger" ng-show="appointmentForm.time.$error.min">Appointment must be after 8am</p>
+                <p class="text-danger" ng-show="appointmentForm.time.$error.max">Appointment must be before 5pm</p>
+                <label>Time:</label>
+                <input name="time" type="time" class="form-control" ng-model='newAppointment.time' min="08:00:00" max="17:00:00" required>
+                <p class="text-danger" ng-show="appointmentForm.complain.$error.minlength">Complaint must have a minimum of 10 characters</p>
+                <label>Complain:</label>
+                <textarea name="complain" class="form-control" rows="3" ng-model='newAppointment.complain' ng-minlength= "10" required></textarea>
+                <div class='pull-right'>
+                    <a href='#/' class='btn btn-danger'>Cancel</a>
+                    <a href='#/' class='btn btn-primary' ng-click='addAppointment()' ng-disabled="appointmentForm.$invalid">Add Appointment</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

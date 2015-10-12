@@ -1,0 +1,32 @@
+<div class='container' ng-controller='appointmentsController'>
+	<div class='row'>
+		<a href="#/" class="pull-right" value="Log Out" onClick="window.location.reload()">Logout</a>
+	</div>
+	<div class='row'>
+		<h2>Doctor's Appointments</h2>
+		<div class="pull-right">
+			Search: <input id="searchbar" class="form-control" ng-model='filter_name'>
+		</div>
+		<table class='table table-hover'>
+	        <thead>
+		        <th>Date</th>
+		        <th>Time</th>
+		        <th>Patient Name</th>
+		        <th>Complain</th>
+		        <th>Action</th>
+	        </thead>
+	        <tbody>
+		        <tr ng-repeat="appointment in appointments | filter: filter_name | orderBy:['date','time'] | filter:futureAppointments ">
+		        	<td ng-bind="appointment.date | date: 'MMMM d yyyy'"></td>
+		        	<td ng-bind="appointment.time | date: 'h:mm a'"></td>
+		        	<td ng-bind='appointment.patient'></td>
+		        	<td ng-bind='appointment.complain'></td>
+		        	<td>
+		        		<a href='#/' ng-show="appointment.patient==currentUser" class='btn btn-danger btn-sm' ng-click='removeAppointment(appointment)'>Cancel</a>
+		        	</td>
+		        </tr>
+	        </tbody>
+	    </table>
+	    <a href='#/addAppointment' class="btn btn-info pull-right">Add New Appointment</a>
+	</div>
+</div>
